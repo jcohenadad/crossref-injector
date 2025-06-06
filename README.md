@@ -168,6 +168,15 @@ inject-crossref --doc 1XYZ... --title "CrossRef"
 
 Make sure the Google Doc is shared with your service account email.
 
+### User has not enabled the Apps Script API
+
+If you _did_ enable the Apps Script but you still see the following message:
+```console
+❌ Injection failed: GaxiosError: User has not enabled the Apps Script API.
+```
+
+Wait a few more minutes for Google to propagate the settings.
+
 ### APIs not working?
 
 Confirm both Apps Script and Drive APIs are enabled in your GCP project.
