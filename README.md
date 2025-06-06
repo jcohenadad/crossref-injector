@@ -15,31 +15,31 @@ It eliminates the need to manually copy-paste multiple script files into each do
 
 ### Install `Node.js`
 
-Install [Node.js](https://nodejs.org/).
+Follow instructions [here](https://nodejs.org/).
 
 ### Create Google Cloud project
 
-1. Go to [Google Cloud](https://console.cloud.google.com/).
+Go to [Google Cloud](https://console.cloud.google.com/).
 
-2. Select or Create a Project
+Select or Create a Project
 - Click the dropdown at the top to select an existing project, or click "New Project"
 - Name it something like CrossRef Injector
 
-3. Enable Required APIs
+Enable Required APIs
 Go to APIs & Services > Library and enable:
 - ✅ Google Drive API
 - ✅ Google Apps Script API
 
-4. Create a Service Account
+Create a Service Account
 Go to IAM & Admin > Service Accounts:
 - Click Create Service Account
 - Name: crossref-injector (or any name)
 - Skip permission for now, click Create and Continue.
 
-5. Grant Access (Optional, skip for now)
+Grant Access (Optional, skip for now)
 Click Continue and then Done (no roles needed here because you'll share Docs directly).
 
-6. Create a Key
+Create a Key
 In the list of service accounts:
 - Click your newly created service account
 - Go to the "Keys" tab
@@ -48,7 +48,7 @@ In the list of service accounts:
 - Click Create → a JSON will be downloaded.
 - Rename it as `credentials.json` and move it in the same folder as the inject.js script.
 
-7. Share Docs with Your Service Account. You must manually share both (i) Your source Apps Script project (CrossRef template) and (ii) Your target Google Docs with the service account email, which looks like:
+Share Docs with Your Service Account. You must manually share both (i) Your source Apps Script project (CrossRef template) and (ii) Your target Google Docs with the service account email, which looks like:
 
 ```css
 crossref-injector@your-project-id.iam.gserviceaccount.com
@@ -56,30 +56,41 @@ crossref-injector@your-project-id.iam.gserviceaccount.com
 
 ### Create a template Apps Script project
 
-1. Go to Google Apps Script Dashboard
+Go to Google Apps Script Dashboard
 🔗 https://script.google.com
 
-2. Create a New Standalone Project
+Create a New Standalone Project
 
 - Click + New Project
 - Click the title and rename it to something like: `CrossRef Template`. 
 
-3. Copy Code from GitHub
+Copy Code from GitHub
 
 - Open the repo:
 🔗 https://github.com/davidrthorn/cross_reference (if no more available, here use [this fork](https://github.com/jcohenadad/cross_reference))
 - You'll need to recreate all files listed under the src root (such as main.gs, label-code.gs, etc.).
 
-4. Get the Script ID
+Get the Script ID
 
 - Click the gear ⚙️ next to your project title → Project Settings
 - Make sure "Show appsscript.json" is enabled
 - Copy the `Script ID`.
 - Paste this `Script ID` into the file `inject.js`. Example:
 
-```js
-const SOURCE_SCRIPT_ID = '1a2B3cD4E5fGH6ijkLmnopQR7stUvWxyz';
-```
+   ```js
+   const SOURCE_SCRIPT_ID = '1a2B3cD4E5fGH6ijkLmnopQR7stUvWxyz';
+   ```
+
+Share script
+
+- Go to [My Projects]()
+- Click the '...' on the right of your project, and select "Share doc + script"
+- Share with the email address listed in the `credentials.json`.
+
+Enable Apps Script API for Your Google Account
+
+- Go to: https://script.google.com/home/usersettings
+- "Apps Script API" — switch it ON
 
 ## 📁 Project Structure
 
@@ -93,20 +104,21 @@ crossref-injector/
 
 ## ⚙️ Installation
 
-1. Clone this repository or copy the script into a folder:
+Clone this repository or copy the script into a folder:
 
-```bash
+```shell
 git clone https://github.com/YOUR_USERNAME/crossref-injector.git
 cd crossref-injector
 ```
 
-2. Install dependencies
+Install dependencies
 
 ```bash
-npm install
+npm init -y
+npm install googleapis minimist
 ```
 
-3. Download `credentials.json` and place it in your project directory.
+Download `credentials.json` and place it in your project directory.
 
 ## 📝 Configuration
 
