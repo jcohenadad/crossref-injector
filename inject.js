@@ -1,30 +1,18 @@
-const fs = require('fs');
 const { google } = require('googleapis');
+const { authorize } = require('./auth');
 const argv = require('minimist')(process.argv.slice(2));
 
 // CLI usage: node inject.js --doc DOC_ID --title "My Script Title"
 
-const SCOPES = [
-  'https://www.googleapis.com/auth/drive',
-  'https://www.googleapis.com/auth/script.projects',
-];
-
 // Config
-const SOURCE_SCRIPT_ID = 'YOUR_TEMPLATE_SCRIPT_ID_HERE';  // Put your CrossRef template Apps Script ID here
+// const SOURCE_SCRIPT_ID = 'YOUR_TEMPLATE_SCRIPT_ID_HERE';  // Put your CrossRef template Apps Script ID here
+const SOURCE_SCRIPT_ID = '1XlBDaw4Kd8n6QAjYtjdOkPo97Oh1JMKKdZL-gevClg8bOo_4MQUOI0LS';  // Put your CrossRef template Apps Script ID here
 const TARGET_DOC_ID = argv.doc;
 const SCRIPT_TITLE = argv.title || 'CrossRef Injected';
 
 if (!TARGET_DOC_ID) {
   console.error('❌ Missing required --doc DOCUMENT_ID argument.');
   process.exit(1);
-}
-
-async function authorize() {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: 'credentials.json',
-    scopes: SCOPES,
-  });
-  return await auth.getClient();
 }
 
 async function injectScript() {
